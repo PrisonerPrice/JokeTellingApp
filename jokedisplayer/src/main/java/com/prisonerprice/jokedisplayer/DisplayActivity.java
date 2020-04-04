@@ -19,7 +19,10 @@ public class DisplayActivity extends AppCompatActivity {
 
         Intent intent = getIntent();
         String text = intent.getStringExtra("JOKE");
-
-        textView.setText(text);
+        if (text != null) {
+            textView.setText(text);
+        } else {
+            textView.setText("ERROR");
+        }
     }
 }

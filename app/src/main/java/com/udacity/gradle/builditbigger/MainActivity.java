@@ -17,7 +17,6 @@ import com.google.api.client.extensions.android.json.AndroidJsonFactory;
 import com.google.api.client.googleapis.services.AbstractGoogleClientRequest;
 import com.google.api.client.googleapis.services.GoogleClientRequestInitializer;
 import com.prisonerprice.jokedisplayer.DisplayActivity;
-import com.prisonerprice.jokelib.Joker;
 import com.udacity.gradle.builditbigger.backend.myApi.MyApi;
 
 import java.io.IOException;
@@ -25,10 +24,13 @@ import java.io.IOException;
 
 public class MainActivity extends AppCompatActivity {
 
+    private Intent intent;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        intent = new Intent(this, DisplayActivity.class);
     }
 
 
@@ -55,17 +57,11 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void tellJoke(View view) {
-        //Toast.makeText(this, joker.getJoke(), Toast.LENGTH_SHORT).show();
-        /*Intent intent = new Intent(this, DisplayActivity.class);
-        intent.putExtra("JOKE", Joker.getJoke());
-        startActivity(intent);
-
-         */
         new EndpointsAsyncTask().execute(new Pair<Context, String>(this, "Austin"));
     }
 
-    static class EndpointsAsyncTask extends AsyncTask<Pair<Context, String>, Void, String> {
-        private static MyApi myApiService = null;
+    class EndpointsAsyncTask extends AsyncTask<Pair<Context, String>, Void, String> {
+        private MyApi myApiService = null;
         private Context context;
 
         @Override
@@ -100,7 +96,9 @@ public class MainActivity extends AppCompatActivity {
 
         @Override
         protected void onPostExecute(String result) {
-            Toast.makeText(context, result, Toast.LENGTH_LONG).show();
+            intent.putExtra("JOKE", result);
+            startActivity(intent);
+            //Toast.makeText(context, result, Toast.LENGTH_LONG).show();
         }
     }
 }
