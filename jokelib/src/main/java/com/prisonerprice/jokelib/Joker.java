@@ -8,10 +8,9 @@ import java.util.Random;
 
 public class Joker {
 
-    private static Joker joker;
     private static String[] jokes;
 
-    private Joker() {
+    public Joker() {
         jokes = new String[]{
                 "What's the best thing about Switzerland?\nI don't know, but the flag is a big plus.",
                 "I invented a new word!\nPlagiarism!",
@@ -22,13 +21,6 @@ public class Joker {
                 "Here about the new restaurant called Karma?\nThere's no menu: You get what you deserve.",
                 "Why don't scientists trust atoms?\nBecause they make up everything."
         };
-    }
-
-    public static Joker getInstance() {
-        if (joker == null) {
-            joker = new Joker();
-        }
-        return joker;
     }
 
     public static String getJoke(){

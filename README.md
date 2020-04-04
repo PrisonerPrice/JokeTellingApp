@@ -88,6 +88,10 @@ https://cloud.google.com/endpoints/docs/frameworks/java/migrating-android
 Note: You do not need to follow the rest of steps in the migration guide, only
 the Setup Cloud SDK.
 
+Another note: It seems that there are some errors with the latest gcloud. I solve this problem by downgrading the version using (Reference: https://github.com/GoogleCloudPlatform/firebase-appengine-backend/issues/21):
+
+		$ gcloud components update --version 240.0.0
+
 Start or stop your local server by using the gradle tasks as shown in the following
 screenshot:
 

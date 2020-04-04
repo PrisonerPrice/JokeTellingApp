@@ -14,8 +14,6 @@ import com.prisonerprice.jokelib.Joker;
 
 public class MainActivity extends AppCompatActivity {
 
-    private final static Joker joker = Joker.getInstance();
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -48,7 +46,7 @@ public class MainActivity extends AppCompatActivity {
     public void tellJoke(View view) {
         //Toast.makeText(this, joker.getJoke(), Toast.LENGTH_SHORT).show();
         Intent intent = new Intent(this, DisplayActivity.class);
-        intent.putExtra("JOKE", joker.getJoke());
+        intent.putExtra("JOKE", Joker.getJoke());
         startActivity(intent);
     }
 
