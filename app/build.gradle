@@ -25,10 +25,45 @@ android {
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
 
+    lintOptions {
+        abortOnError false
+    }
+
+    flavorDimensions "version"
+
     buildTypes {
         release {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+    }
+
+    productFlavors {
+        paid {
+            dimension "version"
+            applicationIdSuffix ".paid"
+        }
+        free {
+            dimension "version"
+            applicationIdSuffix ".free"
+        }
+    }
+
+    sourceSets {
+        main {
+            java.srcDirs = ['src/main/java',]
+            manifest.srcFile 'src/main/AndroidManifest.xml'
+            resources.srcDirs = ['src/main/resources',]
+        }
+        free {
+            manifest.srcFile 'src/free/AndroidManifest.xml'
+            java.srcDirs = ['src/free/java',]
+            resources.srcDirs = ['src/free/resources',]
+        }
+        paid {
+            manifest.srcFile 'src/paid/AndroidManifest.xml'
+            java.srcDirs = ['src/paid/java',]
+            resources.srcDirs = ['src/paid/resources',]
         }
     }
 }
@@ -39,8 +74,9 @@ dependencies {
     endpointsServer project(path: ':backend', configuration: 'endpoints')
     implementation project(':jokedisplayer')
 
+    freeImplementation 'com.google.android.gms:play-services-ads:19.0.1'
+
     implementation 'androidx.appcompat:appcompat:1.1.0'
-    implementation 'com.google.android.gms:play-services-ads:19.0.1'
     implementation 'com.google.api-client:google-api-client:1.23.0'
     implementation 'com.google.http-client:google-http-client-android:1.23.0'
     implementation 'com.google.code.findbugs:jsr305:3.0.2'
